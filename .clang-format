@@ -1,0 +1,43 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+
+ColumnLimit: 100
+IndentWidth: 2
+UseTab: Never
+
+# Align consecutive macro definitions
+AlignConsecutiveMacros:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: true
+  AlignCompound: true
+  PadOperators: true
+
+# Align trailing comments
+AlignTrailingComments:
+  Kind: Always
+  OverEmptyLines: 0
+
+# Space settings
+SpaceBeforeParens: ControlStatements
+SpaceBeforeAssignmentOperators: true
+SpacesInContainerLiterals: false
+
+# Preprocessor indentation
+IndentPPDirectives: None
+
+# Comment settings
+ReflowComments: false
+SpacesBeforeTrailingComments: 2
+
+# Include settings
+IncludeBlocks: Preserve
+
+# Break settings
+AllowShortBlocksOnASingleLine: Never
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+KeepEmptyLinesAtTheStartOfBlocks: false
+
+MaxEmptyLinesToKeep: 1
