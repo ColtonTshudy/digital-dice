@@ -1,1 +1,1 @@
-probe-rs attach --chip STM32F401RETx .\build\Debug\eink-stm32f4.elf
+probe-rs attach --chip STM32F401CCU8 .\build\Debug\lcd-stm32f4.elf

@@ -91,13 +91,13 @@ void  LCDTS_IO_Delay(uint32_t c); /* short time delay (nsec..usec) */
 #define GPIOX_AFR_(a,b,c)     GPIO ## b->AFR[c >> 3] = (GPIO ## b->AFR[c >> 3] & ~(0x0F << (4 * (c & 7)))) | (a << (4 * (c & 7)));
 #define GPIOX_AFR(a, b)       GPIOX_AFR_(a, b)
 
-#define GPIOX_MODER_(a,b,c)   GPIO ## b->MODER = (GPIO##b->MODER & ~(3UL << (2UL * ((c) & 15UL)))) | ((unsigned long)(a) << (2UL * ((c) & 15UL)));
+#define GPIOX_MODER_(a,b,c)   GPIO ## b->MODER = (GPIO ## b->MODER & ~(3 << (2 * c))) | (a << (2 * c));
 #define GPIOX_MODER(a, b)     GPIOX_MODER_(a, b)
 
 #define GPIOX_OTYPER_(a,b,c)  GPIO ## b->OTYPER = (GPIO ## b->OTYPER & ~(1 << c)) | (a << c);
 #define GPIOX_OTYPER(a, b)    GPIOX_OTYPER_(a, b)
 
-#define GPIOX_OSPEEDR_(a,b,c) GPIO ## b->OSPEEDR = (GPIO ## b->OSPEEDR & ~(3UL << (2UL * ((c) & 15UL)))) | ((unsigned long)(a) << (2UL * ((c) & 15UL)));
+#define GPIOX_OSPEEDR_(a,b,c) GPIO ## b->OSPEEDR = (GPIO ## b->OSPEEDR & ~(3 << (2 * c))) | (a << (2 * c));
 #define GPIOX_OSPEEDR(a, b)   GPIOX_OSPEEDR_(a, b)
 
 #define GPIOX_PUPDR_(a,b,c)   GPIO ## b->PUPDR = (GPIO ## b->PUPDR & ~(3 << (2 * c))) | (a << (2 * c));

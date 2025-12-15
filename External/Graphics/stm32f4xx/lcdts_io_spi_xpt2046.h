@@ -28,20 +28,20 @@
 
 /* Lcd and Ts control pins assign (A..K, 0..15)
    - if hardware SPI: SCK, MOSI, MISO pins assign is lock to hardware */
-#define LCD_RST A, LCD_RST_Pin /* If not used leave it that way */
-#define LCD_RS  A, LCD_RS_Pin
+#define LCD_RST A, 6 /* If not used leave it that way */
+#define LCD_RS  A, 5
 
-#define LCD_CS     A, LCD_CS_Pin
-#define LCDTS_SCK  B, LCDTS_SCK_Pin
-#define LCDTS_MOSI B, LCDTS_MOSI_Pin
-#define LCDTS_MISO B, LCDTS_MISO_Pin
-#define TS_CS      B, TS_CS_Pin
-#define TS_IRQ     A, TS_IRQ_Pin /* If not used leave it that way */
+#define LCD_CS     A, 15
+#define LCDTS_SCK  B, 3
+#define LCDTS_MOSI B, 5
+#define LCDTS_MISO B, 4
+#define TS_CS      B, 13
+#define TS_IRQ     A, 8 /* If not used leave it that way */
 
 /* Backlight control
    - BL: A..K, 0..15 (if not used -> X, 0)
    - BL_ON: the logical level of the active state */
-#define LCD_BL   X, 0 /* If not used leave it that way */
+#define LCD_BL   B, 10 /* If not used leave it that way */
 #define LCD_BLON 0
 
 /* When data direction change (OUT->IN) there is a display that requires extra clock

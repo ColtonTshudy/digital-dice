@@ -31,6 +31,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 
 /* USER CODE END Includes */
 
@@ -63,26 +64,20 @@ void Error_Handler(void);
 #define LCD_RS_GPIO_Port GPIOA
 #define LCD_RST_Pin GPIO_PIN_6
 #define LCD_RST_GPIO_Port GPIOA
-#define BACKLIGHT_Pin GPIO_PIN_7
-#define BACKLIGHT_GPIO_Port GPIOA
-#define LCDTS_SCK_Pin GPIO_PIN_10
-#define LCDTS_SCK_GPIO_Port GPIOB
+#define LCD_BL_Pin GPIO_PIN_7
+#define LCD_BL_GPIO_Port GPIOA
 #define TS_CS_Pin GPIO_PIN_13
 #define TS_CS_GPIO_Port GPIOB
-#define LCDTS_MISO_Pin GPIO_PIN_14
-#define LCDTS_MISO_GPIO_Port GPIOB
-#define LCDTS_MOSI_Pin GPIO_PIN_15
-#define LCDTS_MOSI_GPIO_Port GPIOB
 #define TS_IRQ_Pin GPIO_PIN_8
 #define TS_IRQ_GPIO_Port GPIOA
 #define LCD_CS_Pin GPIO_PIN_15
 #define LCD_CS_GPIO_Port GPIOA
 #define LCD_SCK_Pin GPIO_PIN_3
 #define LCD_SCK_GPIO_Port GPIOB
-#define LCD_MISO_Pin GPIO_PIN_4
-#define LCD_MISO_GPIO_Port GPIOB
-#define LCD_MOSI_Pin GPIO_PIN_5
-#define LCD_MOSI_GPIO_Port GPIOB
+#define LCDTS_MISO_Pin GPIO_PIN_4
+#define LCDTS_MISO_GPIO_Port GPIOB
+#define LCDTS_MOSI_Pin GPIO_PIN_5
+#define LCDTS_MOSI_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

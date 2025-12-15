@@ -45,6 +45,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
+#include "main.h"
 
 /** @addtogroup Utilities
   * @{

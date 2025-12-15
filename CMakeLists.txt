@@ -45,11 +45,20 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
 )
 
+file(GLOB GRAPHICS_SOURCES 
+    "${CMAKE_HOME_DIRECTORY}/External/Graphics/stm32f4xx/*.c"
+    "${CMAKE_HOME_DIRECTORY}/External/Graphics/*.c"
+    "${CMAKE_HOME_DIRECTORY}/External/Graphics/lcd/ili9341/*.c"
+    "${CMAKE_HOME_DIRECTORY}/External/Graphics/Fonts/*.c"
+)
+
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
-    ${CMAKE_HOME_DIRECTORY}/External/Graphics/stm32f4xx/lcdts_io_spi_xpt2046.c
-
+    ${GRAPHICS_SOURCES}
+    ${CMAKE_HOME_DIRECTORY}/Src/debugger.c
+    # ${CMAKE_HOME_DIRECTORY}/External/Graphics/App/TouchCalib/appTouchCalib.c
+    ${CMAKE_HOME_DIRECTORY}/External/Graphics/App/Paint/appPaint.c
 )
 
 # Add include paths
@@ -58,6 +67,8 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_HOME_DIRECTORY}/External/Graphics
     ${CMAKE_HOME_DIRECTORY}/External/Graphics/stm32f4xx
     ${CMAKE_HOME_DIRECTORY}/External/Graphics/Fonts
+    ${CMAKE_HOME_DIRECTORY}/External/Graphics/App
+    ${CMAKE_HOME_DIRECTORY}/External/Graphics/lcd/ili9341
 )
 
 # Add project symbols (macros)
