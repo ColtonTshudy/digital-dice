@@ -46,7 +46,7 @@ void mainApp(void)
   static uint32_t last_touch_time=0;
   
   #define FILTER_ALPHA 0.3f  // Lower = more smoothing (0.1-0.5 range)
-  #define TOUCH_TIMEOUT 500   // ms - gap to consider new touch vs continuous
+  #define TOUCH_TIMEOUT 10   // ms - gap to consider new touch vs continuous
   
   while(1)
   {
