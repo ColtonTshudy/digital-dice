@@ -3,7 +3,7 @@ Language: Cpp
 BasedOnStyle: LLVM
 
 ColumnLimit: 100
-IndentWidth: 2
+IndentWidth: 4
 UseTab: Never
 
 # Align consecutive macro definitions

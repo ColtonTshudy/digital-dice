@@ -72,9 +72,9 @@
 /* some colors */
 #define LCD_COLOR_BLACK         RC(0x0000)
 #define LCD_COLOR_GRAY          RC(0xF7DE)
-#define LCD_COLOR_BLUE          RC(0x001F)
-#define LCD_COLOR_RED           RC(0xF800)
-#define LCD_COLOR_GREEN         RC(0x07E0)
+#define LCD_COLOR_BLUE          RC(0x773d)
+#define LCD_COLOR_RED           RC(0xf269)
+#define LCD_COLOR_GREEN         RC(0x27ea)
 #define LCD_COLOR_CYAN          RC(0x07FF)
 #define LCD_COLOR_MAGENTA       RC(0xF81F)
 #define LCD_COLOR_YELLOW        RC(0xFFE0)

@@ -20,7 +20,7 @@ void mainApp(void)
   BSP_LCD_Init();
   BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
   BSP_LCD_Clear(LCD_COLOR_BLACK);
-  boxsize = BSP_LCD_GetXSize() / 6;
+  boxsize = BSP_LCD_GetXSize() / 7;  // Changed from 6 to 7
 
   BSP_LCD_SetTextColor(LCD_COLOR_RED);
   BSP_LCD_FillRect(0, 0, boxsize, boxsize);
@@ -35,6 +35,11 @@ void mainApp(void)
   BSP_LCD_SetTextColor(LCD_COLOR_MAGENTA);
   BSP_LCD_FillRect(boxsize * 5, 0, boxsize, boxsize);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+
+  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  BSP_LCD_FillRect(boxsize * 6, 0, boxsize, boxsize);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+  BSP_LCD_DrawRect(boxsize * 6 + 2, 2, boxsize - 4, boxsize - 4);  // Draw X or border
 
   BSP_LCD_DrawRect(0, 0, boxsize, boxsize);
   currentcolor = LCD_COLOR_RED;
@@ -91,6 +96,29 @@ void mainApp(void)
         {
           currentcolor = LCD_COLOR_MAGENTA;
           BSP_LCD_DrawRect(boxsize*5, 0, boxsize, boxsize);
+        }
+        else if (ts.X < boxsize * 7)
+        {
+          BSP_LCD_Clear(LCD_COLOR_BLACK);
+          // Redraw color palette
+          BSP_LCD_SetTextColor(LCD_COLOR_RED);
+          BSP_LCD_FillRect(0, 0, boxsize, boxsize);
+          BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
+          BSP_LCD_FillRect(boxsize, 0, boxsize, boxsize);
+          BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
+          BSP_LCD_FillRect(boxsize * 2, 0, boxsize, boxsize);
+          BSP_LCD_SetTextColor(LCD_COLOR_CYAN);
+          BSP_LCD_FillRect(boxsize * 3, 0, boxsize, boxsize);
+          BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+          BSP_LCD_FillRect(boxsize * 4, 0, boxsize, boxsize);
+          BSP_LCD_SetTextColor(LCD_COLOR_MAGENTA);
+          BSP_LCD_FillRect(boxsize * 5, 0, boxsize, boxsize);
+          BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+          BSP_LCD_FillRect(boxsize * 6, 0, boxsize, boxsize);
+          BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
+          BSP_LCD_DrawRect(boxsize * 6 + 2, 2, boxsize - 4, boxsize - 4);
+          BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+          BSP_LCD_DrawRect((ts.X / boxsize) * boxsize, 0, boxsize, boxsize);
         }
 
         if (oldcolor != currentcolor)

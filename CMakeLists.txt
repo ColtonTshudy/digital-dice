@@ -40,6 +40,9 @@ add_executable(${CMAKE_PROJECT_NAME})
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
 
+# Compile Flags
+string(APPEND CMAKE_EXE_LINKER_FLAGS "-u _printf_float")
+
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
@@ -59,6 +62,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_HOME_DIRECTORY}/Src/debugger.c
     # ${CMAKE_HOME_DIRECTORY}/External/Graphics/App/TouchCalib/appTouchCalib.c
     ${CMAKE_HOME_DIRECTORY}/External/Graphics/App/Paint/appPaint.c
+    ${CMAKE_HOME_DIRECTORY}/Src/app_main.c
+    ${CMAKE_HOME_DIRECTORY}/Src/app_stats.c
 )
 
 # Add include paths
@@ -68,6 +73,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_HOME_DIRECTORY}/External/Graphics/stm32f4xx
     ${CMAKE_HOME_DIRECTORY}/External/Graphics/Fonts
     ${CMAKE_HOME_DIRECTORY}/External/Graphics/App
+    ${CMAKE_HOME_DIRECTORY}/External/Graphics/lcd/ili9341
     ${CMAKE_HOME_DIRECTORY}/External/Graphics/lcd/ili9341
 )
 
