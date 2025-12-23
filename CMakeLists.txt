@@ -49,10 +49,9 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 )
 
 file(GLOB GRAPHICS_SOURCES 
-    "${CMAKE_HOME_DIRECTORY}/External/Graphics/stm32f4xx/*.c"
-    "${CMAKE_HOME_DIRECTORY}/External/Graphics/*.c"
-    "${CMAKE_HOME_DIRECTORY}/External/Graphics/lcd/ili9341/*.c"
-    "${CMAKE_HOME_DIRECTORY}/External/Graphics/Fonts/*.c"
+    "${CMAKE_HOME_DIRECTORY}/External/Graphics2/*.c"
+    "${CMAKE_HOME_DIRECTORY}/External/Graphics2/LCD/*.c"
+    "${CMAKE_HOME_DIRECTORY}/External/Graphics2/TOUCH/*.c"
 )
 
 # Add sources to executable
@@ -60,8 +59,6 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     ${GRAPHICS_SOURCES}
     ${CMAKE_HOME_DIRECTORY}/Src/debugger.c
-    # ${CMAKE_HOME_DIRECTORY}/External/Graphics/App/TouchCalib/appTouchCalib.c
-    ${CMAKE_HOME_DIRECTORY}/External/Graphics/App/Paint/appPaint.c
     ${CMAKE_HOME_DIRECTORY}/Src/app_main.c
     ${CMAKE_HOME_DIRECTORY}/Src/app_stats.c
 )
@@ -69,12 +66,9 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
-    ${CMAKE_HOME_DIRECTORY}/External/Graphics
-    ${CMAKE_HOME_DIRECTORY}/External/Graphics/stm32f4xx
-    ${CMAKE_HOME_DIRECTORY}/External/Graphics/Fonts
-    ${CMAKE_HOME_DIRECTORY}/External/Graphics/App
-    ${CMAKE_HOME_DIRECTORY}/External/Graphics/lcd/ili9341
-    ${CMAKE_HOME_DIRECTORY}/External/Graphics/lcd/ili9341
+    ${CMAKE_HOME_DIRECTORY}/External/Graphics2
+    ${CMAKE_HOME_DIRECTORY}/External/Graphics2/LCD
+    ${CMAKE_HOME_DIRECTORY}/External/Graphics2/TOUCH
 )
 
 # Add project symbols (macros)

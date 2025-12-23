@@ -2,6 +2,7 @@
 
 #include "main.h"
 #include <string.h>
+#include <stdbool.h>
 
 void rtt_init(void);
 void rtt_write(const char *, uint32_t);

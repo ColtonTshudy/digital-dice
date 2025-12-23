@@ -7,7 +7,9 @@
  * @param numberOfDice - how many dice to roll
  * @return struct Statistics* 
  */
-void initStats(struct Statistics *stats, uint8_t sides, uint8_t number_of_dice) {
+void initStats(struct Statistics *stats, uint8_t sides, uint8_t number_of_dice, uint32_t seed) {
+    srand(seed);
+
     stats->sides = sides;
     stats->number_of_dice = number_of_dice;
 
@@ -53,6 +55,14 @@ void printStats(struct Statistics *stats) {
     for (uint8_t i = 0; i < stats->max_roll + 1; i++) {
         printf("  Roll counts for [%u]: %u\r\n", i, stats->roll_counts[i]);
     }
+}
+
+/**
+ * @brief Public setter for statistic's srand()
+ * @param seed - 32 bit seed for srand()
+ */
+void setRandSeed(uint32_t seed) {
+    srand(seed);
 }
 
 /**
