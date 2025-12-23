@@ -74,7 +74,6 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_HOME_DIRECTORY}/External/Graphics/Fonts
     ${CMAKE_HOME_DIRECTORY}/External/Graphics/App
     ${CMAKE_HOME_DIRECTORY}/External/Graphics/lcd/ili9341
-    ${CMAKE_HOME_DIRECTORY}/External/Graphics/lcd/ili9341
 )
 
 # Add project symbols (macros)
