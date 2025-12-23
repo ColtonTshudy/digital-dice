@@ -146,7 +146,7 @@ void setRandSeed(uint32_t seed) {
 uint32_t generateRandSeed() {
     uint32_t seed = 0;
     uint16_t adc_buffer[4] = {0};
-    HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, 4);
+    HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buffer, 4);
     uint8_t offset = 0;
     while (offset < 32 / 2) {
         if (isADCFinished) {
@@ -154,12 +154,12 @@ uint32_t generateRandSeed() {
             uint8_t i = 0;
             while (i < 4 && offset < 32 / 2) {
                 // printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(adc_buffer[i]));
-                seed += (adc_buffer[3-i++] & 0x0f) << (2 * offset++);
+                seed += (adc_buffer[3 - i++] & 0x0f) << (2 * offset++);
             }
             // printf("\r\n");
-            
-            if(offset < 32 / 2){
-                HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, 4);
+
+            if (offset < 32 / 2) {
+                HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adc_buffer, 4);
             }
         }
     }
@@ -171,7 +171,7 @@ uint32_t generateRandSeed() {
     // uint8_t i = 0;
     // while (i<100) {
     //     if (isADCFinished) {
-            
+
     //         isADCFinished = false;
     //         uint8_t j = 0;
     //         while (j < 5) {
@@ -225,7 +225,7 @@ uint32_t generateRandSeed() {
     return seed;
 }
 
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc){
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc) {
     (void)hadc;
     isADCFinished = true;
 }
