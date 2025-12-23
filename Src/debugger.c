@@ -43,43 +43,49 @@ void rtt_init(void) {
 
 // Write function
 void rtt_write(const char *data, uint32_t len) {
-    // for (uint32_t i = 0; i < len; i++) {
-    //     uint32_t write_pos = _SEGGER_RTT.up[0].write_pos;
-    //     uint32_t read_pos = _SEGGER_RTT.up[0].read_pos;
-    //     uint32_t next_pos = (write_pos + 1) % _SEGGER_RTT.up[0].size;
-    //     static uint32_t last_read_pos = 0;
-    //     uint32_t this_tick = HAL_GetTick();
-    //     static uint32_t debug_message_timeout_tracker = 0;
+    static uint32_t last_read_pos = UINT32_MAX;  // Sentinel value
+    static uint32_t debug_message_timeout_tracker = 0;
+    static bool initialized = false;
+    
+    // Initialize timeout tracker on first call
+    if (!initialized) {
+        debug_message_timeout_tracker = HAL_GetTick();
+        initialized = true;
+    }
+    
+    for (uint32_t i = 0; i < len; i++) {
+        uint32_t write_pos = _SEGGER_RTT.up[0].write_pos;
+        uint32_t read_pos = _SEGGER_RTT.up[0].read_pos;
+        uint32_t next_pos = (write_pos + 1) % _SEGGER_RTT.up[0].size;
+        uint32_t this_tick = HAL_GetTick();
 
-    //     // Track the last time the debugger read debug message buffer
-    //     // If time exceeds DEBUG_MESSAGE_TIMEOUT, don't even write to the buffer.
-    //     if (last_read_pos != read_pos) {
-    //         debug_message_timeout_tracker = this_tick;
-    //     }
+        // Update timeout tracker if debugger has read
+        if (last_read_pos != read_pos) {
+            debug_message_timeout_tracker = this_tick;
+            last_read_pos = read_pos;
+        }
 
-    //     // A couple strategies are possible on a write.
-    //     // 1. wait infinitely for the buffer to be read
-    //     // 2. stop writing to the buffer if it's full (buffer will become stale)
+        // Wait if buffer full, but timeout after DEBUG_MESSAGE_TIMEOUT
+        while (next_pos == read_pos && (this_tick - debug_message_timeout_tracker) < DEBUG_MESSAGE_TIMEOUT)
+        {
+            read_pos = _SEGGER_RTT.up[0].read_pos;
+            this_tick = HAL_GetTick();
+            
+            // If debugger read while waiting, reset timeout
+            if (last_read_pos != read_pos) {
+                debug_message_timeout_tracker = this_tick;
+                last_read_pos = read_pos;
+            }
+        }
 
-    //     // Wait if buffer full
-    //     // while (next_pos == read_pos && this_tick - DEBUG_MESSAGE_TIMEOUT < debug_message_timeout_tracker)
-    //     while (next_pos == read_pos)
-    //     {
-    //         read_pos = _SEGGER_RTT.up[0].read_pos;
-    //         this_tick =
-    //             HAL_GetTick();  // update time here too, otherwise it could get stuck here if buffer fills too quickly
-    //     }
+        // Skip writing if buffer still full after timeout
+        if (next_pos == read_pos) {
+            continue;
+        }
 
-    //     // Skip this byte if buffer is full
-    //     // if (next_pos == read_pos)
-    //     // {
-    //     //     continue; // Drop the data, don't block
-    //     // }
-
-    //     _SEGGER_RTT.up[0].buffer[write_pos] = data[i];
-    //     _SEGGER_RTT.up[0].write_pos = next_pos;
-    //     last_read_pos = read_pos;
-    // }
+        _SEGGER_RTT.up[0].buffer[write_pos] = data[i];
+        _SEGGER_RTT.up[0].write_pos = next_pos;
+    }
 }
 
 /**

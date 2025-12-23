@@ -51,7 +51,7 @@ void loop()
       printf("Rolls on [%u]: %u\r\n", i, stats.roll_counts[i]);
     }
 
-  // HAL_Delay(1000);
+  HAL_Delay(1000);
 }
 
 void generateGraph(struct Statistics *stats)

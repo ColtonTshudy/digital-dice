@@ -388,6 +388,9 @@ void ili9341_Init(void)
   ili9341_FillRect(0, 0, ILI9341_SIZE_X, ILI9341_SIZE_Y, 0x0000);
   LCD_Delay(10);
   #endif
+
+  LCD_IO_WriteCmd8(ILI9341_INVON);    // Display on
+  LCD_Delay(10);
   
   LCD_IO_WriteCmd8(ILI9341_DISPON);    // Display on
   LCD_Delay(10);

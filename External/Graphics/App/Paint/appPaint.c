@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include "main.h"
+#include "debugger.h"
 
 /* BSP LCD driver */
 #include "stm32_adafruit_lcd.h"
@@ -13,6 +14,9 @@ void StartDefaultTask(void const * argument)
 void mainApp(void)
 #endif
 {
+  rtt_init();
+  printf("Hello, world!\r\n");
+
   TS_StateTypeDef ts;
   uint16_t boxsize;
   uint16_t oldcolor, currentcolor;

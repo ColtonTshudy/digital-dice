@@ -1,6 +1,7 @@
 #include "main.h"
 #include "ts.h"
 #include "stm32_adafruit_ts.h"
+#include "my_ft6336.h"
 
 extern TS_DrvTypeDef     *ts_drv;
 extern int32_t            ts_cindex[];
