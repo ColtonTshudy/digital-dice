@@ -41,17 +41,21 @@ void loop()
 {
   heartbeat();
 
-  generateGraph(&stats);
   // stats.roll_counts[7]++;
   // stats.number_of_rolls++;
-  roll(&stats);
+  
+  if(ts.TouchDetected){
+    setRandSeed(generateRandSeed());
+    roll(&stats);
+    generateGraph(&stats);
+    HAL_Delay(2000);
+  }
+//   
 
-  for(uint8_t i = 0; i < 13; i++)
-    {
-      printf("Rolls on [%u]: %u\r\n", i, stats.roll_counts[i]);
-    }
-
-  HAL_Delay(1000);
+//   for(uint8_t i = 0; i < 13; i++)
+//     {
+//       printf("Rolls on [%u]: %u\r\n", i, stats.roll_counts[i]);
+//     }
 }
 
 void generateGraph(struct Statistics *stats)
@@ -105,7 +109,6 @@ void generateGraph(struct Statistics *stats)
       BSP_LCD_DisplayStringAt(5, y_pos, (uint8_t *)label, LEFT_MODE);
 
       uint16_t x_pos = 35;
-      uint8_t printing = 0;
 
       // Draw 20 bars
       for(uint8_t j = 1; j <= 20; j++)
@@ -125,14 +128,12 @@ void generateGraph(struct Statistics *stats)
                 {
                   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
                 }
-              printing = 1;
             }
 
           // Switch to gray when count reaches 0
           if(count == 0)
             {
               BSP_LCD_SetTextColor(LCD_COLOR_DARKGRAY);
-              printing = 0;
             }
 
           // Draw bar if condition is met

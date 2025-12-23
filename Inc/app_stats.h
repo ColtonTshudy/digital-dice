@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+#include "debugger.h"
 
 struct Statistics {
     uint16_t *roll_counts;
@@ -21,3 +23,5 @@ uint64_t combinations(uint8_t n, uint8_t k);
 float diceRollProbability(uint8_t p, uint8_t n, uint8_t s);
 void printStats(struct Statistics *stats);
 void roll(struct Statistics *stats);
+uint32_t generateRandSeed();
+void setRandSeed(uint32_t);

@@ -1,5 +1,8 @@
 #include "app_stats.h"
 
+extern ADC_HandleTypeDef hadc1;
+bool isADCFinished = false;
+
 /**
  * @brief 
  * 
@@ -134,4 +137,95 @@ uint64_t combinations(uint8_t n, uint8_t k) {
         result = (result * (n - i)) / (i + 1);
     }
     return result;
+}
+
+void setRandSeed(uint32_t seed) {
+    srand(seed);
+}
+
+uint32_t generateRandSeed() {
+    uint32_t seed = 0;
+    uint16_t adc_buffer[4] = {0};
+    HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, 4);
+    uint8_t offset = 0;
+    while (offset < 32 / 2) {
+        if (isADCFinished) {
+            isADCFinished = false;
+            uint8_t i = 0;
+            while (i < 4 && offset < 32 / 2) {
+                // printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(adc_buffer[i]));
+                seed += (adc_buffer[3-i++] & 0x0f) << (2 * offset++);
+            }
+            // printf("\r\n");
+            
+            if(offset < 32 / 2){
+                HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, 4);
+            }
+        }
+    }
+    HAL_ADC_Stop_DMA(&hadc1);
+
+    // uint16_t maxes[5] = {0};
+    // uint16_t mins[5] ={9999,9999,9999,9999,9999};
+    // HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, 5);
+    // uint8_t i = 0;
+    // while (i<100) {
+    //     if (isADCFinished) {
+            
+    //         isADCFinished = false;
+    //         uint8_t j = 0;
+    //         while (j < 5) {
+    //             // printf("%u,\t", adc_buffer[j]);
+    //             if (maxes[j] < adc_buffer[j]){
+    //                 maxes[j] = adc_buffer[j];
+    //             }
+    //             if (mins[j] > adc_buffer[j]){
+    //                 mins[j] = adc_buffer[j];
+    //             }
+    //             j++;
+    //         }
+    //         // printf("\r\n");
+    //         if(i<99){
+    //             HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, 5);
+    //         }
+    //         i++;
+    //     }
+    // }
+    // HAL_ADC_Stop_DMA(&hadc1);
+
+    // printf("===============================RANGE     ");
+    // uint8_t j = 0;
+    // while (j < 5) {
+    //     printf("%u,\t", maxes[j]-mins[j++]);
+    // }
+    // printf("\r\n");
+
+    // printf("===============================MAXES     ");
+    // j = 0;
+    // while (j < 5) {
+    //     printf("%u,\t", maxes[j++]);
+    // }
+    // printf("\r\n");
+
+    // printf("===============================MINS     ");
+    // j = 0;
+    // while (j < 5) {
+    //     printf("%u,\t", mins[j++]);
+    // }
+    // printf("\r\n");
+
+    // printf("===============================BIT SWEEP     ");
+    // j = 0;
+    // while (j < 5) {
+    //     printf("%f,\t", log2(maxes[j]-mins[j++]));
+    // }
+    // printf("\r\n");
+
+    printf("Seed generated: %lu\r\n", seed);
+    return seed;
+}
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc){
+    (void)hadc;
+    isADCFinished = true;
 }
